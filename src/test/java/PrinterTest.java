@@ -11,6 +11,7 @@ public class PrinterTest {
     public void before(){
         printer = new Printer();
         printer.addsPaper(100);
+        printer.addsToner(30);
     }
 
     @Test
@@ -26,21 +27,24 @@ public class PrinterTest {
     }
 
     @Test
-    public void checkPrintFails(){
+    public void checkPrintFailsduetoPaper(){
         printer.setPaper(10);
-        assertEquals("Not enough Paper", printer.print(2,10) );
+        assertEquals("Not enough Resources", printer.print(2,10) );
+    }
+    @Test
+    public void checkPrintFailsduetoToner(){
+        printer.setToner(10);
+        assertEquals("Not enough Resources", printer.print(2,10) );
     }
 
     @Test
     public void checkTonerReduction(){
-        printer.addsToner(30);
         printer.print(2,10);
         assertEquals(10, printer.getToner());
     }
 
     @Test
     public void checkTonerStaysTheSameWithNoPrint(){
-        printer.addsToner(30);
         printer.setPaper(10);
         printer.print(2,10);
         assertEquals(30, printer.getToner());

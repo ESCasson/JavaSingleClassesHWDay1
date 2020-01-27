@@ -10,6 +10,10 @@ public class Printer {
     public int getToner() {
         return toner;
     }
+    // set toner makes creating test easier
+    public void setToner(int numToner) {
+        this.toner = numToner;
+    }
     public void addsToner(int addedToner) {
         this.toner = this.toner + addedToner;
     }
@@ -29,12 +33,13 @@ public class Printer {
 //created a string return as in the 'real' world some kind of return is likely to be needed.
     public String print(int numPages, int numCopies) {
         int pagesToPrint = numPages * numCopies;
-        if (pagesToPrint <= paper) {
+        if (pagesToPrint <= paper && pagesToPrint <= toner) {
             paper = paper - pagesToPrint;
             toner = toner - pagesToPrint;
             return "Print Complete";
-        } else { return "Not enough Paper";}
+        } else { return "Not enough Resources";}
     }
+
 
 
 }
